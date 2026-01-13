@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -11,109 +12,114 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@500;600&display=swap" rel="stylesheet">
 </head>
+
 <body>
 
-<div class="dashboard">
+    <div class="dashboard">
 
-    <div class="header">
-        <div class="header-title">
-            <div class="title-text">
-                <div class="title-row">
-                    <h1>Alzheimer's Disease and Healthy Aging</h1>
-                    <span class="material-icons info-icon" title="About this dashboard">
-                        info
-                    </span>
-                </div>
-                <div class="subtitle">
-                    CDC Behavioral Risk Factor Surveillance Data
+        <div class="header">
+            <div class="header-title">
+                <div class="title-text">
+                    <div class="title-row">
+                        <h1>Alzheimer's Disease and Healthy Aging</h1>
+                        <span class="material-icons info-icon" title="About this dashboard">
+                            info
+                        </span>
+                    </div>
+                    <div class="subtitle">
+                        CDC Behavioral Risk Factor Surveillance Data
+                    </div>
                 </div>
             </div>
         </div>
+
+        <section class="top">
+
+            <div class="panel map-panel">
+                <div class="search-wrapper">
+                    <span class="material-icons search-icon">search</span>
+                    <input type="text" class="search-input" placeholder="Search state…" aria-label="Search state" />
+                </div>
+                <svg id="map"></svg>
+            </div>
+
+            <div class="panel stats-panel">
+                <div class="stat-box">
+                    TOTAL SURVEY<br>
+                    <strong id="totalCount">–</strong>
+                </div>
+                <div class="stat-box">USER GROUP<br>(Overall)</div>
+                <div class="stat-box">AGE GROUP COUNT</div>
+                <div class="stat-box">STRATIFICATION</div>
+            </div>
+
+            <div class="panel bar-panel">
+                <svg id="barChart"></svg>
+            </div>
+
+        </section>
+
+        <section class="filter">
+            <div class="select-wrapper">
+                <span class="material-icons question-icon" aria-hidden="true">
+                    help_outline
+                </span>
+
+                <select id="questionSelect" class="question-select" aria-label="Select a question">
+                    <option value="" disabled>Select a question…</option>
+
+                    <option
+                        value="Percentage of older adults who are currently obese, with a body mass index (BMI) of 30 or more"
+                        selected>
+                        Percentage of older adults who are currently obese, with a body mass index (BMI) of 30 or more
+                    </option>
+
+                    <option
+                        value="Percentage of older adults who have smoked at least 100 cigarettes in their entire life and still smoke every day or some days">
+                        Percentage of older adults who have smoked at least 100 cigarettes in their entire life and
+                        still smoke every day or some days
+                    </option>
+                </select>
+
+
+                <span class="material-icons dropdown-icon" aria-hidden="true">
+                    expand_more
+                </span>
+            </div>
+        </section>
+
+        <section class="bottom">
+            <div class="panel">
+                <div class="panel-header">
+                    <button id="yearFilterBtn" class="year-filter">
+                        –
+                    </button>
+                </div>
+
+                <svg id="lineChart"></svg>
+            </div>
+
+
+            <div class="panel">
+                <div class="panel-header">
+                    <button id="radarFilterBtn" class="year-filter">
+                        –
+                    </button>
+                </div>
+                <svg id="radarChart"></svg>
+            </div>
+
+            <div class="panel">
+                <svg id="histogramPlot"></svg>
+            </div>
+
+        </section>
+
     </div>
 
-    <section class="top">
-
-        <div class="panel map-panel">
-            <div class="search-wrapper">
-                <span class="material-icons search-icon">search</span>
-                <input
-                    type="text"
-                    class="search-input"
-                    placeholder="Search state…"
-                    aria-label="Search state"
-                />
-            </div>
-            <svg id="map"></svg>
-        </div>
-
-        <div class="panel stats-panel">
-            <div class="stat-box">
-                TOTAL SURVEY<br>
-                <strong id="totalCount">–</strong>
-            </div>
-            <div class="stat-box">USER GROUP<br>(Overall)</div>
-            <div class="stat-box">AGE GROUP COUNT</div>
-            <div class="stat-box">STRATIFICATION</div>
-        </div>
-
-        <div class="panel bar-panel">
-            <svg id="barChart"></svg>
-        </div>
-
-    </section>
-
-<section class="filter">
-  <div class="select-wrapper">
-    <span class="material-icons question-icon" aria-hidden="true">
-      help_outline
-    </span>
-
-    <select
-  id="questionSelect"
-  class="question-select"
-  aria-label="Select a question"
->
-  <option value="" disabled>Select a question…</option>
-
-  <option value="Percentage of older adults who are currently obese, with a body mass index (BMI) of 30 or more?"
-          selected>
-    Percentage of older adults who are currently obese, with a body mass index (BMI) of 30 or more?
-  </option>
-
-  <option value="Percentage of older adults who have smoked at least 100 cigarettes in their entire life and still smoke every day or some days?">
-    Percentage of older adults who have smoked at least 100 cigarettes in their entire life and still smoke every day or some days?
-  </option>
-</select>
-
-
-    <span class="material-icons dropdown-icon" aria-hidden="true">
-      expand_more
-    </span>
-  </div>
-</section>
-
-
-
-    <section class="bottom">
-
-        <div class="panel">
-            <svg id="lineChart"></svg>
-        </div>
-
-        <div class="panel">
-            <svg id="radarChart"></svg>
-        </div>
-
-        <div class="panel">
-            <svg id="boxPlot"></svg>
-        </div>
-
-    </section>
-
-</div>
-
-<script src="https://d3js.org/d3.v7.min.js"></script>
-<script type="module" src="main.js"></script>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script type="module" src="main.js"></script>
 
 </body>
+
 </html>
