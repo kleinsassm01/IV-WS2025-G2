@@ -11,13 +11,13 @@ body {
 
 .dashboard {
     display: grid;
-    grid-template-rows: 60px 40% 50px 1fr;
+    grid-template-rows: 60px minmax(0, 2fr) 50px minmax(0, 2fr);
     height: 100vh;
 }
 
 .top {
     display: grid;
-    grid-template-columns: 35% 15% 50%;
+    grid-template-columns: 7fr 3fr 10fr;
     gap: 10px;
     padding: 10px;
 }
@@ -27,6 +27,10 @@ body {
     grid-template-columns: repeat(3, 1fr);
     gap: 10px;
     padding: 10px;
+}
+
+.top, .bottom {
+    min-height: 0;
 }
 
 .filter {
@@ -41,26 +45,49 @@ body {
     border: 1px solid #ccc;
     position: relative;
     padding: 5px;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
 }
 
 .panel svg {
-    width: 100%;
-    height: 100%;
+  width: 100%;
+  flex: 1;
+  min-height: 0;
 }
 
 .stats-panel {
-    display: grid;
-    grid-template-rows: repeat(4, 1fr);
-    gap: 8px;
+  display: grid;
+  grid-template-rows: repeat(3, 1fr);
+  gap: 8px;
+  justify-content: center;
+  align-content: stretch;
+  height: 100%;
 }
 
 .stat-box {
-    background: #486578;
-    color: white;
-    text-align: center;
-    padding: 10px;
-    font-size: 0.9rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: #095885;
+  color: white;
+  height: 100%;
+  text-align: center;
 }
+
+.stat-title {
+  font-size: 0.8rem;
+  line-height: 1.2;
+  opacity: 0.9;
+}
+
+.stat-value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-top: 4px;
+}
+
 
 .header {
     border-bottom: 2px solid black;
@@ -68,7 +95,7 @@ body {
     align-items: center;
     justify-content: center;
     height: 60px;
-    background: #915757;
+    background: #560000;
     color: white;
 }
 
@@ -85,7 +112,7 @@ body {
 .title-row {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 4px;
 }
 
 .title-row h1 {
@@ -269,6 +296,8 @@ body {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
     transition: opacity 0.15s;
     z-index: 100;
+    max-width: 280px;
+    line-height: 1.25;
 }
 
 
@@ -303,8 +332,23 @@ body {
     background: #eee;
 }
 
+.year-filter.active::before {
+  content: "× ";
+  font-weight: 700;
+  opacity: 0.85;
+}
+
+.year-filter.active {
+  border-color: #999;
+}
+
+.year-filter.active:hover {
+  background: #f1f1f1;
+  border-color: #666;
+}
+
 .point {
-    fill: red;
+    fill: #2563eb;
     cursor: pointer;
     transition: r 0.2s ease, stroke 0.2s ease;
 }
@@ -347,4 +391,195 @@ body {
 .state.selected {
     stroke: #000;
     stroke-width: 2.5px;
+}
+
+/* Grouped Bar Chart Panel */
+
+.bar-panel {
+    padding: 8px;
+}
+
+.bar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 6px;
+}
+
+.bar-title {
+    font-family: "Raleway", sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #222;
+    letter-spacing: 0.2px;
+}
+
+.bar-controls {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.bar-label {
+    font-size: 0.8rem;
+    color: #444;
+}
+
+.bar-select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+
+    border: 1px solid #c4c4c4;
+    background: #f9f9f9;
+    border-radius: 14px;
+    padding: 6px 28px 6px 12px;
+    font-size: 12px;
+    cursor: pointer;
+    height: 28px;
+    line-height: 1;
+    font-family: Arial, sans-serif;
+    color: #222;
+    outline: none;
+    transition: background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.bar-select:hover {
+    background: #eee;
+}
+
+.bar-select:focus {
+    border-color: #333;
+    box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.12);
+}
+
+.bar-controls {
+    position: relative;
+}
+
+.bar-controls::after {
+    content: "expand_more";
+    font-family: "Material Icons";
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 18px;
+    color: #777;
+    pointer-events: none;
+}
+
+#groupedBarChart {
+    flex: 1;
+    min-height: 250px;
+}
+
+#groupedBarChart text {
+    font-family: Arial, sans-serif;
+    fill: #222;
+}
+
+#groupedBarChart .axis path,
+#groupedBarChart .axis line {
+    stroke: #b9b9b9;
+}
+
+#groupedBarChart .tick line {
+    stroke: #e0e0e0;
+}
+
+#groupedBarChart .tick text {
+    fill: #555;
+    font-size: 11px;
+}
+
+#groupedBarChart .grid line {
+    stroke: #eee;
+}
+
+#groupedBarChart .legend text {
+    fill: #444;
+    font-size: 11px;
+}
+
+.deferred-ui {
+  visibility: hidden;
+}
+
+
+.tour-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  z-index: 999;
+}
+
+.tour-tooltip {
+  position: absolute;
+  background: #fff;
+  color: #333;
+  padding: 12px 14px;
+  border-radius: 6px;
+  max-width: 260px;
+  font-size: 13px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+  z-index: 1000;
+}
+
+.tour-tooltip h4 {
+  margin: 0 0 6px 0;
+  font-size: 14px;
+}
+
+.tour-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.tour-actions button {
+  font-size: 12px;
+  border: none;
+  padding: 5px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.tour-next {
+  background: #1f77b4;
+  color: #fff;
+}
+
+.tour-skip {
+  background: transparent;
+  color: #777;
+}
+
+.help-tour-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  color: #555;
+  display: flex;
+  align-items: center;
+}
+
+.help-tour-btn:hover {
+  color: #1f77b4;
+}
+
+
+.help-icon {
+    font-size: 18px;
+    color: #fdfdfd;
+    cursor: pointer;
+    line-height: 1;
+    transform: translateY(1px);
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.help-icon:hover {
+    transform: translateY(1px) scale(1.1);
 }

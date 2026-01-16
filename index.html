@@ -25,6 +25,9 @@
                         <span class="material-icons info-icon" title="About this dashboard">
                             info
                         </span>
+                        <button id="helpTourBtn" class="help-tour-btn" title="Start guided tour">
+                            <span class="material-icons help-icon">help_outline</span>
+                        </button>
                     </div>
                     <div class="subtitle">
                         CDC Behavioral Risk Factor Surveillance Data
@@ -37,11 +40,12 @@
 
             <div class="panel map-panel">
                 <div class="search-wrapper">
-                    <span class="material-icons search-icon">search</span>
-                    <input type="text" class="search-input" placeholder="Search state…" aria-label="Search state" />
+                    <span class="material-icons search-icon deferred-ui">search</span>
+                    <input type="text" class="search-input deferred-ui" placeholder="Search state…"
+                        aria-label="Search state" />
                 </div>
                 <div class="panel-header">
-                    <button id="mapFilterBtn" class="year-filter">
+                    <button id="mapFilterBtn" class="year-filter deferred-ui">
                         –
                     </button>
                 </div>
@@ -50,16 +54,44 @@
 
             <div class="panel stats-panel">
                 <div class="stat-box">
-                    TOTAL SURVEY<br>
-                    <strong id="totalCount">–</strong>
+                    <div class="stat-title">
+                        TOTAL NUMBER<br>OF SURVEYS
+                    </div>
+                    <div class="stat-value" id="totalCount">
+                        —
+                    </div>
                 </div>
-                <div class="stat-box">USER GROUP<br>(Overall)</div>
-                <div class="stat-box">AGE GROUP COUNT</div>
-                <div class="stat-box">STRATIFICATION</div>
+
+                <div class="stat-box">
+                    <div class="stat-title">
+                        NUMBER OF QUESTIONS
+                    </div>
+                    <div class="stat-value">
+                        9
+                    </div>
+                </div>
+
+                <div class="stat-box">
+                    <div class="stat-title">
+                        DATA RANGE FROM
+                    </div>
+                    <div class="stat-value">
+                        2015 – 2022
+                    </div>
+                </div>
             </div>
 
             <div class="panel bar-panel">
-                <svg id="barChart"></svg>
+                <div class="panel-header bar-header">
+                    <div class="bar-controls deferred-ui">
+                        <label for="dimension" class="bar-label deferred-ui">Group by</label>
+                        <select id="dimension" class="bar-select deferred-ui" aria-label="Group bar chart by">
+                            <option value="sex" selected>Sex</option>
+                            <option value="ethnicity">Ethnicity</option>
+                        </select>
+                    </div>
+                </div>
+                <svg id="groupedBarChart"></svg>
             </div>
 
         </section>
@@ -78,12 +110,40 @@
                         selected>
                         Percentage of older adults who are currently obese, with a body mass index (BMI) of 30 or more
                     </option>
-
                     <option
                         value="Percentage of older adults who have smoked at least 100 cigarettes in their entire life and still smoke every day or some days">
                         Percentage of older adults who have smoked at least 100 cigarettes in their entire life and
                         still smoke every day or some days
                     </option>
+                    <option value="Percentage of older adults ever told they have arthritis">
+                        Percentage of older adults ever told they have arthritis
+                    </option>
+                    <option value="Percentage of older adults who are experiencing frequent mental distress">
+                        Percentage of older adults who are experiencing frequent mental distress
+                    </option>
+                    <option value="Percentage of older adults with a lifetime diagnosis of depression">
+                        Percentage of older adults with a lifetime diagnosis of depression
+                    </option>
+                    <option value="Percentage of older adults who reported binge drinking within the past 30 days">
+                        Percentage of older adults who reported binge drinking within the past 30 days
+                    </option>
+
+                    <option
+                        value="Percentage of older adults who reported subjective cognitive decline or memory loss that interferes with their ability to engage in social activities or household chores">
+                        Percentage of older adults who reported subjective cognitive decline or memory loss that
+                        interferes with their ability to engage in social activities or household chores
+                    </option>
+                    <option
+                        value="Percentage of older adults who reported that as a result of subjective cognitive decline or memory loss that they need assistance with day-to-day activities">
+                        Percentage of older adults who reported that as a result of subjective cognitive decline or
+                        memory loss that they need assistance with day-to-day activities
+                    </option>
+                    <option
+                        value="Percentage of older adults with subjective cognitive decline or memory loss who reported talking with a health care professional about it">
+                        Percentage of older adults with subjective cognitive decline or memory loss who reported talking
+                        with a health care professional about it
+                    </option>
+
                 </select>
 
 
@@ -96,7 +156,7 @@
         <section class="bottom">
             <div class="panel">
                 <div class="panel-header">
-                    <button id="yearFilterBtn" class="year-filter">
+                    <button id="yearFilterBtn" class="year-filter deferred-ui">
                         –
                     </button>
                 </div>
@@ -107,7 +167,7 @@
 
             <div class="panel">
                 <div class="panel-header">
-                    <button id="radarFilterBtn" class="year-filter">
+                    <button id="radarFilterBtn" class="year-filter deferred-ui">
                         –
                     </button>
                 </div>
@@ -124,7 +184,7 @@
 
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <script src="https://d3js.org/topojson.v3.min.js"></script>
-    <script type="module" src="main.js"></script>
+    <script type="module" src="js/main.js"></script>
 
 </body>
 
