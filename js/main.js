@@ -1,4 +1,4 @@
-import AppState from "./store/state.js";
+import AppState from "./data/state.js";
 import DashboardController from "./controller/dashboardcontroller.js";
 import DataService from "./data/dataservice.js";
 import { ABOUT_TEXT } from "./data/constants.js";
